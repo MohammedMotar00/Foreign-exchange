@@ -18,11 +18,14 @@ axios(
 
   for (rate in thisRate) {
     let result = [rate, thisRate[rate]];
-    for (l of result) console.log(l);
-    console.log(result.length);
+    // console.log(result);
+    let objj = {};
+    rates.push({ x: rate, y: thisRate[rate] });
+    // console.log({ x: rate }, { y: thisRate[rate] });
+    // for (l in result) console.log(l);
     // console.log(rate, thisRate[rate]);
     // obj.rates.push([rate, thisRate[rate]]);
-    rates.push(rate, thisRate[rate]);
+    // rates.push(rate, thisRate[rate]);
   }
 
   // for (x of rates) console.log(x);
