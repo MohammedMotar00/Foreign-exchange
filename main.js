@@ -17,9 +17,12 @@ axios(
   console.log(thisRate);
 
   for (rate in thisRate) {
-    console.log(rate, thisRate[rate]);
+    let result = [rate, thisRate[rate]];
+    for (l of result) console.log(l);
+    console.log(result.length);
+    // console.log(rate, thisRate[rate]);
     // obj.rates.push([rate, thisRate[rate]]);
-    (obj.prop = rate), thisRate[rate];
+    rates.push(rate, thisRate[rate]);
   }
 
   // for (x of rates) console.log(x);
