@@ -110,6 +110,7 @@ const date = new Date();
 const currentDate = date.toISOString().slice(0, 10);
 
 input.value = currentDate;
+input.max = currentDate;
 
 let tbody = document.querySelector("tbody");
 
@@ -117,11 +118,6 @@ const ascend = document.getElementById("ascend");
 const descend = document.getElementById("descend");
 
 let runOnce = true;
-
-// descend.addEventListener("click", () => {
-//   desc = true;
-//   ascending = false;
-// });
 
 let arr = [];
 
@@ -187,7 +183,7 @@ const fetchOnce = () => {
   });
 };
 
-// Change date
+// *Runs when the date changes
 input.addEventListener("change", (e) => {
   tbody.innerHTML = "";
   runOnce = false;
@@ -256,25 +252,4 @@ input.addEventListener("change", (e) => {
   });
 });
 
-// if (runOnce) fetchOnce();
 runOnce && fetchOnce();
-
-let testArr = [];
-let testObj = {};
-testObj.a = 1;
-testObj.b = 2;
-testObj.c = 3;
-testObj.d = 4;
-testObj.e = 5;
-console.log(testObj);
-
-for (x in testObj) {
-  testArr.push({ v: testObj[x] });
-}
-// testArr.map((a) => console.log(a));
-// console.log(testArr);
-testArr.sort((a, b) => {
-  return b.v - a.v;
-});
-
-// console.log(testArr);
