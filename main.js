@@ -191,6 +191,7 @@ const fetchOnce = () => {
 input.addEventListener("change", (e) => {
   tbody.innerHTML = "";
   runOnce = false;
+  arr = [];
 
   axios(
     `http://data.fixer.io/api/${e.target.value}?access_key=${API_KEY}`
