@@ -1,25 +1,3 @@
-const API_KEY = "63377d3005155c9326790be4bd611513";
-const rates = [];
-const input = document.querySelector("input");
-
-const date = new Date();
-const currentDate = date.toISOString().slice(0, 10);
-
-input.value = currentDate;
-
-let tbody = document.querySelector("tbody");
-const div = document.getElementById("id");
-let p = document.createElement("p");
-p.innerHTML = "hejsan";
-div.appendChild(p);
-
-const descending = [];
-const ascending = [];
-
-let dec = false;
-
-const up = document.getElementById("up");
-const down = document.getElementById("down");
 // up.addEventListener("click", () => {
 //   dec = true;
 //   console.log(dec);
@@ -124,27 +102,161 @@ const down = document.getElementById("down");
 // descending / nedåtgående
 // rates.sort((a, b) => b.value - a.value);
 
+const API_KEY = "63377d3005155c9326790be4bd611513";
+const rates = [];
+const input = document.querySelector("input");
+
+const date = new Date();
+const currentDate = date.toISOString().slice(0, 10);
+
+input.value = currentDate;
+
+let tbody = document.querySelector("tbody");
+
+const ascend = document.getElementById("ascend");
+const descend = document.getElementById("descend");
+
+let runOnce = true;
+
+// descend.addEventListener("click", () => {
+//   desc = true;
+//   ascending = false;
+// });
+
 let arr = [];
-axios(
-  `http://data.fixer.io/api/${currentDate || "latest"}?access_key=${API_KEY}`
-).then((res) => {
-  let rates = res.data.rates;
-  for (result in rates) {
-    // console.log(result, rates[result]);
-    arr.push({ type: result, value: rates[result] });
-  }
-  // for (let x of arr) console.log(x);
-  // arr.sort((a, b) => sort.push(a.value - b.value));
 
-  // console.log(sort);
+const fetchOnce = () => {
+  axios(
+    `http://data.fixer.io/api/${currentDate || "latest"}?access_key=${API_KEY}`
+  ).then((res) => {
+    let rates = res.data.rates;
 
-  arr.sort((a, b) => {
-    return a.value - b.value;
+    for (result in rates) arr.push({ type: result, value: rates[result] });
+
+    // render direct
+    arr.sort((a, b) => a.value - b.value);
+    arr.map((item) => {
+      console.log(item);
+      let tr = document.createElement("tr");
+      let td = document.createElement("td");
+      let td2 = document.createElement("td");
+
+      td.innerHTML = item.type;
+      td2.innerHTML = item.value;
+      tr.appendChild(td);
+      tr.appendChild(td2);
+      tbody.appendChild(tr);
+    });
+
+    // ascending
+    ascend.addEventListener("click", () => {
+      tbody.innerHTML = "";
+
+      arr.sort((a, b) => a.value - b.value);
+      arr.map((item) => {
+        console.log(item);
+        let tr = document.createElement("tr");
+        let td = document.createElement("td");
+        let td2 = document.createElement("td");
+
+        td.innerHTML = item.type;
+        td2.innerHTML = item.value;
+        tr.appendChild(td);
+        tr.appendChild(td2);
+        tbody.appendChild(tr);
+      });
+    });
+
+    descend.addEventListener("click", () => {
+      tbody.innerHTML = "";
+
+      arr.sort((a, b) => b.value - a.value);
+      arr.map((item) => {
+        console.log(item);
+        let tr = document.createElement("tr");
+        let td = document.createElement("td");
+        let td2 = document.createElement("td");
+
+        td.innerHTML = item.type;
+        td2.innerHTML = item.value;
+        tr.appendChild(td);
+        tr.appendChild(td2);
+        tbody.appendChild(tr);
+      });
+    });
   });
+};
 
-  console.log(arr);
-  // for (x of sort) console.log(x);
+// Change date
+input.addEventListener("change", (e) => {
+  tbody.innerHTML = "";
+  runOnce = false;
+
+  axios(
+    `http://data.fixer.io/api/${e.target.value}?access_key=${API_KEY}`
+  ).then((res) => {
+    const rates = res.data.rates;
+
+    for (result in rates) arr.push({ type: result, value: rates[result] });
+
+    tbody.innerHTML = "";
+
+    // Render direct when this function is on
+    arr.sort((a, b) => a.value - b.value);
+    arr.map((item) => {
+      console.log(item);
+      let tr = document.createElement("tr");
+      let td = document.createElement("td");
+      let td2 = document.createElement("td");
+
+      td.innerHTML = item.type;
+      td2.innerHTML = item.value;
+      tr.appendChild(td);
+      tr.appendChild(td2);
+      tbody.appendChild(tr);
+    });
+
+    // ascending
+    ascend.addEventListener("click", () => {
+      tbody.innerHTML = "";
+
+      arr.sort((a, b) => a.value - b.value);
+      arr.map((item) => {
+        console.log(item);
+        let tr = document.createElement("tr");
+        let td = document.createElement("td");
+        let td2 = document.createElement("td");
+
+        td.innerHTML = item.type;
+        td2.innerHTML = item.value;
+        tr.appendChild(td);
+        tr.appendChild(td2);
+        tbody.appendChild(tr);
+      });
+    });
+
+    descend.addEventListener("click", () => {
+      tbody.innerHTML = "";
+
+      arr.sort((a, b) => b.value - a.value);
+      arr.map((item) => {
+        console.log(item);
+        let tr = document.createElement("tr");
+        let td = document.createElement("td");
+        let td2 = document.createElement("td");
+
+        td.innerHTML = item.type;
+        td2.innerHTML = item.value;
+        tr.appendChild(td);
+        tr.appendChild(td2);
+        tbody.appendChild(tr);
+      });
+    });
+  });
 });
+
+// if (runOnce) fetchOnce();
+runOnce && fetchOnce();
 
 let testArr = [];
 let testObj = {};
