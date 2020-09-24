@@ -8,9 +8,15 @@
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   </head>
   <body>
-    <input type="date" name="date" placeholder="select date" />
-    <button id="ascend">Ascend</button>
-    <button id="descend">Descend</button>
+    <input type="date" name="date" />
+
+    <form>
+      <select id="select">
+        <option value="ascend">Ascend</option>
+        <option value="descend">Descend</option>
+      </select>
+    </form>
+
     <table>
       <thead>
         <tr>
