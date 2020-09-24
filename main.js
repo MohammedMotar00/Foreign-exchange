@@ -6,47 +6,43 @@ const date = new Date();
 const currentDate = date.toISOString().slice(0, 10);
 
 input.value = currentDate;
-let obj = {};
-let y;
 
 axios(
   `http://data.fixer.io/api/${currentDate || "latest"}?access_key=${API_KEY}`
 ).then((res) => {
   const thisRate = res.data.rates;
 
-  console.log(thisRate);
-
   for (rate in thisRate) {
-    let result = [rate, thisRate[rate]];
-    // console.log(result);
-    let objj = {};
-    rates.push({ x: rate, y: thisRate[rate] });
-    // console.log({ x: rate }, { y: thisRate[rate] });
-    // for (l in result) console.log(l);
-    // console.log(rate, thisRate[rate]);
-    // obj.rates.push([rate, thisRate[rate]]);
-    // rates.push(rate, thisRate[rate]);
-  }
+    rates.push({ type: rate, value: thisRate[rate] });
 
-  // for (x of rates) console.log(x);
+    // ascending / stigande
+    // rates.sort((a, b) => a.value - b.value);
+
+    // descending / nedåtgående
+    // rates.sort((a, b) => b.value - a.value);
+  }
 
   input.addEventListener("change", (e) => {
     axios(
       `http://data.fixer.io/api/${e.target.value}?access_key=${API_KEY}`
     ).then((res) => {
-      const rates = res.data.rates;
-      console.log(rates);
-      // for (let x in rates) {
-      //   arr.push(x);
-      // }
+      const thisRate = res.data.rates;
+
+      for (rate in thisRate) {
+        rates.push({ type: rate, value: thisRate[rate] });
+
+        // ascending / stigande
+        // rates.sort((a, b) => a.value - b.value);
+
+        // descending / nedåtgående
+        // rates.sort((a, b) => b.value - a.value);
+      }
     });
   });
 });
 
-// for (x in rates) console.log(x);
-console.log(rates);
-// console.log(rates);
-// rates.sort((a, b) => {
-//   console.log(parseFloat("this is a: ", a, "this is b: ", b));
-// });
-console.log(obj);
+// ascending / stigande
+rates.sort((a, b) => a.value - b.value);
+
+// descending / nedåtgående
+// rates.sort((a, b) => b.value - a.value);
