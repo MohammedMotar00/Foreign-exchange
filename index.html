@@ -6,27 +6,31 @@
     <title>Foreign exchange</title>
     <script defer src="./main.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <input type="date" name="date" />
+    <div class="container">
+      <div class="pick">
+        <input type="date" name="date" />
+        <form>
+          <select id="select">
+            <option value="ascend">Ascend</option>
+            <option value="descend">Descend</option>
+          </select>
+        </form>
+      </div>
 
-    <form>
-      <select id="select">
-        <option value="ascend">Ascend</option>
-        <option value="descend">Descend</option>
-      </select>
-    </form>
-
-    <table>
-      <thead>
-        <tr>
-          <th>Title</th>
-        </tr>
-        <tr>
-          <th>Value</th>
-        </tr>
-      </thead>
-      <tbody></tbody>
-    </table>
+      <div class="table__container">
+        <table>
+          <thead>
+            <tr>
+              <th>Title</th>
+              <th>Value</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
   </body>
 </html>

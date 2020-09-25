@@ -31,7 +31,6 @@ const fetchOnce = () => {
     // render direct
     arr.sort((a, b) => a.value - b.value);
     arr.map((item) => {
-      // console.log(item);
       let tr = document.createElement("tr");
       let td = document.createElement("td");
       let td2 = document.createElement("td");
@@ -101,6 +100,9 @@ input.addEventListener("change", (e) => {
     tbody.innerHTML = "";
 
     // Render direct when this function is on
+    // setting the select value back do ascend
+    select.value = "ascend";
+
     arr.sort((a, b) => a.value - b.value);
     arr.map((item) => {
       console.log(item);
